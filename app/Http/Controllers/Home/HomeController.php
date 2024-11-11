@@ -7,13 +7,12 @@ use App\Models\Student;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(): View|Factory|Application
     {
-        $students = Student::orderBy('year', 'desc')->orderBy('rank')->with('courses')->get();
+        $students = Student::orderBy('year', 'desc')->orderBy('rank')->with('courses')->get()->groupBy('year');
         return view('index', compact('students'));
     }
 }

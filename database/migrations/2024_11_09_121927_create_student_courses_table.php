@@ -16,8 +16,7 @@ return new class extends Migration
             $table->foreignId('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->string('title');
-            $table->string('teacher')->nullable();
-            $table->string('link')->nullable();
+            $table->string('slug');
             $table->softDeletes();
             $table->timestamps();
         });

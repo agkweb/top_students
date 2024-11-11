@@ -26,6 +26,8 @@ class Student extends Model
             case '1' :
                 $gender = 'آقای';
                 break;
+            default:
+                $gender = '';
         }
         return $gender;
     }
@@ -33,25 +35,6 @@ class Student extends Model
     public function courses(): HasMany
     {
         return $this->hasMany(StudentCourse::class);
-    }
-
-    public function medal($rank): string
-    {
-        switch ($rank){
-            case '1' :
-                $medal = 'golden.jpg';
-                break;
-            case '2' :
-                $medal = 'silver.jpg';
-                break;
-            case '3' :
-                $medal = 'bronze.jpg';
-                break;
-            default :
-                $medal = 'green.jpg';
-                break;
-        }
-        return $medal;
     }
 
 }
