@@ -1,0 +1,244 @@
+* {
+    direction: rtl;
+}
+
+@supports (position: sticky) {
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+}
+
+/*---------------------    -------------------------*/
+
+
+/*----------------------main-content------------------*/
+
+.main-content {
+    width: 100%;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+/* .circle-image {
+   
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #ccc;
+  position: absolute;
+  bottom: 0;  
+} */
+/* .half-circle-top {
+    width: 100px;
+    height: 50px;
+    border-radius: 100px 100px 0 0;
+    background-color: #ccc;
+    position: absolute;
+    bottom: 50px;
+    overflow: hidden;
+  }
+
+  .half-circle-bottom {
+    width: 100px;
+    height: 50px;
+    border-radius: 0 0 100px 100px;
+    background-color: #ccc;
+    position: absolute;
+    bottom: 0;
+  } */
+
+.circle-image__img {
+    top: 50%;
+    left: 50%;
+    max-width: 160px;
+    height: auto;
+}
+
+.row .detail-source .detail-source-p {
+    margin: 5px;
+    border-radius: 4px;
+    background-color: #e6e6e6;
+    color: rgb(37, 37, 37);
+    text-align: center;
+    font-size: 14px;
+}
+
+.detail-source {
+    margin: 36px 5px;
+    background-color: #eceaea;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px #adadadef;
+    transition-duration: 0.15s;
+
+}
+
+.detail-source:hover {
+    box-shadow: 4px 4px 4px 4px #b3b3b3e5;
+    transition-duration: 0.35s;
+}
+
+.detail-source div .person-name,
+.detail-source div .detail-source-p,
+.detail-source div span .badge-episode {
+    font-size: 14px;
+}
+
+.detail-source .person-name,
+.detail-source .Course-parts,
+.detail-source .Course-duration,
+.detail-source .progress-text {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+
+
+.detail-source .Course-parts,
+.detail-source .Course-duration,
+.detail-source .progress-text {
+    text-align: right;
+}
+
+.detail-source .person-name {
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.detail-source .progress-text {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/*-----------------------list-film------------------*/
+
+
+
+/*-----------------Changes detail-source-------------------*/
+.main-content .detail-source .Part-course {
+    background-color: #015c74;
+}
+
+.main-content .detail-source .Duration-course {
+    background-color: #015c74;
+}
+
+.main-content .detail-source .Text-progress {
+    background-color: #015c74;
+    font-size: 14px;
+    text-align: right;
+}
+
+
+/* .rank-container {
+    text-align: center;
+} */
+
+
+
+.rank-text {
+    font-size: 0.7rem;
+    position: absolute;
+    bottom: 13px;
+    right: 0;
+}
+
+/*                      modal css                       */
+.modal-detail {
+    text-align: right;
+}
+
+.mp3-auido {
+    width: 100%;
+}
+
+.seen-product {
+    font-size: 0.6rem;
+    position: relative;
+    left: 0;
+    align-content: center;
+}
+
+.btn-outline-navy-blue:hover {
+    .navy-blue {
+        color: #fff !important;
+        text-decoration: none;
+    }
+}
+
+
+
+
+
+/*                             picture                                  */
+.picture {
+    width: 155px;
+    height: 155px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-bottom-left-radius: 1000px;
+    border-bottom-right-radius: 1000px;
+    overflow: hidden;
+    /* background-color: red; */
+}
+
+.circle {
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
+    background: radial-gradient(#8a7bb1, #0D0920);
+    bottom: -3px;
+
+}
+
+.person_image, .circle {
+    position: absolute;
+}
+
+.person_image {
+    width: 85%;
+    transition: all 250ms linear;
+}
+
+.picture:hover .person_image {
+    transform: scale(1.4);
+}
+
+
+/*                         full diaplay name                             */
+
+.full-display-title {
+    width: 95%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    align-self: center;
+
+}
+
+.detail-source:hover {
+    .full-display-title {
+        width: auto;
+        height: auto;
+        display: block;
+        top: 100%;
+        left: 0;
+        text-wrap: balance;
+        text-align: right;
+        padding-right: 3px !important;
+    }
+}
+
+
+/*                   number over picture                     */
+
+.number-modal {
+    color: honeydew;
+    font-size: 40px;
+    position: absolute;
+    top: 47%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+}
