@@ -7,6 +7,7 @@ use App\Models\Student;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 
 class HomeController extends Controller
 {
@@ -14,5 +15,14 @@ class HomeController extends Controller
     {
         $students = Student::orderBy('year', 'desc')->orderBy('rank')->with('courses')->get()->groupBy('year');
         return view('index', compact('students'));
+    }
+
+    public function result(Student $student): Factory|View|Application|RedirectResponse
+    {
+        if ($student->result != null){
+            return view('result', compact('student'));
+        }else{
+            return redirect()->back();
+        }
     }
 }

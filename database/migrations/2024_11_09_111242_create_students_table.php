@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('fullname');
-            $table->boolean('gender')->nullable();
             $table->string('major');
             $table->integer('rank');
             $table->string('university');
             $table->string('behalf');
-            $table->string('text')->nullable();
             $table->integer('year');
+            $table->boolean('gender')->nullable();
+            $table->string('text')->nullable();
             $table->string('voice')->nullable();
             $table->string('result')->nullable();
-            $table->string('avatar')->default('avatar.png');
+            $table->string('avatar');
             $table->softDeletes();
             $table->timestamps();
         });

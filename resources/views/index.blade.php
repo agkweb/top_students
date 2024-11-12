@@ -12,12 +12,16 @@
         <div class="container-fluid">
             <div class="row main-content d-flex justify-content-center justify-content-md-between justify-content-md-around p-4">
                 @foreach($students as $year => $yearStudent)
-                    <label>{{ $year }}</label>
+                    <div class="alert alert-info w-100 text-center">رتبه های برتر سال: {{ $year }}</div>
                     @foreach($yearStudent as $student)
                         <div class="detail-source d-flex flex-column col-8 col-lg-3 col-xl-2 col-md-3 col-sm-4 mx-sm-2">
                             <div class="picture my-4 mx-auto">
                                 <div class="circle"></div>
-                                <img src="{{ '/storage/students/avatars/' . $student->avatar }}" alt="{{ $student->fullname }}-avatar" class="person_image" id="output" width="100" height="100"/>
+                                @if($student->avatar)
+                                    <img src="/upload/students/avatars/' . {{ $student->avatar }}" alt="{{ $student->fullname }}-avatar" class="person_image" id="output" width="100" height="100"/>
+                                @else
+                                    <img src="/assets/images/{{ $student->getRawOriginal('gender') == 1 ? 'avatar1.png' : 'avatar0.png' }}" alt="{{ $student->fullname }}-avatar" class="person_image" id="output" width="100" height="100"/>
+                                @endif
                             </div>
                             <div class="row d-flex justify-content-md-between align-items-center justify-content-around">
                                 <div class="col-7 p-0 d-flex flex-column">
@@ -49,13 +53,13 @@
                                             <div class="row justify-content-center">
                                                 <div class="row d-flex col-10 justify-content-center">
                                                     @switch($student->rank)
-                                                        @case(1)
+                                                        @case('1')
                                                             <img src="/assets/images/medals/gold.png" alt="" class="col-8">
                                                             @break
-                                                        @case(2)
+                                                        @case('2')
                                                             <img src="/assets/images/medals/silver.png" alt="" class="col-8">
                                                             @break
-                                                        @case(3)
+                                                        @case('3')
                                                             <img src="/assets/images/medals/bronze.png" alt="" class="col-8">
                                                             @break
                                                         @default
@@ -82,20 +86,30 @@
                                                 </div>
                                                 <div class="row d-flex col-12 justify-content-center align-items-center">
                                                     @foreach($student->courses as $course)
-                                                        <div class="btn btn-outline-navy-blue col-sm-5 col-10 m-2 row d-flex justify-content-between" style="cursor: default;">
-                                                            {{ $course->title }}
-                                                            <a href="{{ $course->link }}" class="navy-blue d-flex justify-items-center ">
-                                                                <small class="seen-product col-3 pl-0">
-                                                                    مشاهده
-                                                                </small>
-                                                            </a>
+                                                        <div class="btn btn-outline-navy-blue col-sm-5 col-10 m-2 row d-flex justify-content-between" style="cursor: default;{{ $course->slug ? '' : 'opacity: .5' }}" data-toggle="tooltip" data-placement="top" title="{{ $course->title }}">
+                                                            {{ Str::limit($course->title, 12, $end='...') }}
+                                                            @if($course->slug)
+                                                                <a href="https://agkins.com/products/{{ $course->slug }}" class="navy-blue d-flex justify-items-center ">
+                                                                    <small class="seen-product col-3 pl-0">
+                                                                        مشاهده
+                                                                    </small>
+                                                                </a>
+                                                            @else
+                                                                <a class="navy-blue d-flex justify-items-center">
+                                                                    <small class="seen-product col-3 pl-0">
+                                                                        مشاهده
+                                                                    </small>
+                                                                </a>
+                                                            @endif
                                                         </div>
                                                     @endforeach
                                                 </div>
                                                 <br>
                                                 <div class="pdf-download-and-moshaver row d-flex col-12 justify-content-center align-items-center mt-3">
                                                     <a href="http://agkins.com/categories/%D8%AA%D8%B1%D9%85%20%D8%AA%D8%A7%D8%A8%D8%B3%D8%AA%D8%A7%D9%86" class="btn btn-outline-navy-blue col-10 col-sm-8  m-2 row d-flex"><small class="col-12">ارتباط با مشاور</small></a>
-                                                    <a href="http://agkins.com/categories/%D8%AA%D8%B1%D9%85%20%D8%AA%D8%A7%D8%A8%D8%B3%D8%AA%D8%A7%D9%86" class="btn btn-outline-navy-blue col-10 col-sm-8 m-2 row d-flex"><small class=" col-12 ">مشاهده ی کارنامه</small></a>
+                                                    @if($student->result != null)
+                                                        <a href="{{ route('results', ['student' => $student]) }}" class="btn btn-outline-navy-blue col-10 col-sm-8 m-2 row d-flex"><small class=" col-12 ">مشاهده ی کارنامه</small></a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -104,7 +118,6 @@
                             </div>
                         </div>
                     @endforeach
-                    <br>
                 @endforeach
             </div>
         </div>

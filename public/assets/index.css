@@ -22,13 +22,13 @@
 }
 
 /* .circle-image {
-   
+
   width: 100px;
   height: 100px;
   border-radius: 50%;
   background-color: #ccc;
   position: absolute;
-  bottom: 0;  
+  bottom: 0;
 } */
 /* .half-circle-top {
     width: 100px;
@@ -207,7 +207,7 @@
 }
 
 
-/*                         full diaplay name                             */
+/*                         full display name                             */
 
 .full-display-title {
     width: 95%;
@@ -216,6 +216,29 @@
     text-overflow: ellipsis;
     align-self: center;
 
+}
+
+.detail-source:hover {
+    .full-display-title {
+        width: auto;
+        height: auto;
+        display: block;
+        top: 100%;
+        left: 0;
+        text-wrap: balance;
+        text-align: right;
+        padding-right: 3px !important;
+    }
+}
+
+/*                         fully display product title                             */
+
+.course-title {
+    width: 95%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    align-self: center;
 }
 
 .detail-source:hover {
