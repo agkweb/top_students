@@ -14,13 +14,13 @@ class HomeController extends Controller
     public function index(): View|Factory|Application
     {
         $students = Student::orderBy('year', 'desc')->orderBy('rank')->with('courses')->get()->groupBy('year');
-        return view('index', compact('students'));
+        return view('home.top_students.index', compact('students'));
     }
 
     public function result(Student $student): Factory|View|Application|RedirectResponse
     {
         if ($student->result != null){
-            return view('result', compact('student'));
+            return view('home.top_students.result', compact('student'));
         }else{
             return redirect()->back();
         }
