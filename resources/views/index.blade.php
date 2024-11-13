@@ -14,19 +14,19 @@
                 @foreach($students as $year => $yearStudent)
                     <div class="alert alert-info w-100 text-center">رتبه های برتر سال: {{ $year }}</div>
                     @foreach($yearStudent as $student)
-                        <div class="detail-source d-flex flex-column col-8 col-lg-3 col-xl-2 col-md-3 col-sm-4 mx-sm-2">
+                        <div class="detail-source d-flex flex-column col-8 col-lg-3 col-xl-2 col-md-3 col-sm-4 mx-sm-2 lazyload">
                             <div class="picture my-4 mx-auto">
                                 <div class="circle"></div>
                                 @if($student->avatar)
-                                    <img src="/upload/students/avatars/' . {{ $student->avatar }}" alt="{{ $student->fullname }}-avatar" class="person_image" id="output" width="100" height="100"/>
+                                    <img src="/upload/students/avatars/' . {{ $student->avatar }}" alt="{{ $student->fullname }}-avatar" class="person_image" id="output" />
                                 @else
-                                    <img src="/assets/images/{{ $student->getRawOriginal('gender') == 1 ? 'avatar1.png' : 'avatar0.png' }}" alt="{{ $student->fullname }}-avatar" class="person_image" id="output" width="100" height="100"/>
+                                    <img src="/assets/images/{{ $student->getRawOriginal('gender') == 1 ? 'avatar1.png' : 'avatar0.png' }}" alt="{{ $student->fullname }}-avatar" class="person_image" id="output"/>
                                 @endif
                             </div>
-                            <div class="row d-flex justify-content-md-between align-items-center justify-content-around">
+                            <div class="row d-flex justify-content-md-between align-items-center justify-content-around text-justify">
                                 <div class="col-7 p-0 d-flex flex-column">
                                     <p class="person-name detail-source-p font-weight-bolder p-0 m-0 full-display-title"><small>{{ $student->gender }}</small> {{ $student->fullname }} </p>
-                                    <p class="detail-source-p font-weight-bolder p-0 m-0 " style="font-size: 20 !important;">
+                                    <p class="detail-source-p font-weight-bolder p-0 m-0 full-display-title" style="font-size: 20 !important;">
                                         {{ $student->major }}
                                     </p>
                                 </div>
@@ -54,19 +54,19 @@
                                                 <div class="row d-flex col-10 justify-content-center">
                                                     @switch($student->rank)
                                                         @case('1')
-                                                            <img src="/assets/images/medals/gold.png" alt="" class="col-8">
+                                                            <img src="/assets/images/medals/gold.png" alt="" class="col-sm-6 col-7">
                                                             @break
                                                         @case('2')
-                                                            <img src="/assets/images/medals/silver.png" alt="" class="col-8">
+                                                            <img src="/assets/images/medals/silver.png" alt="" class="col-sm-6 col-7">
                                                             @break
                                                         @case('3')
-                                                            <img src="/assets/images/medals/bronze.png" alt="" class="col-8">
+                                                            <img src="/assets/images/medals/bronze.png" alt="" class="col-sm-6 col-7">
                                                             @break
                                                         @default
-                                                            <img src="/assets/images/medals/green.png" alt="" class="col-8">
+                                                            <img src="/assets/images/medals/green.png" alt="" class="col-sm-6 col-7">
                                                             @break
                                                     @endswitch
-                                                    <div class="number-modal" style="margin-top: 50px">{{ $student->rank }}</div>
+                                                    <div class="number-modal col-2 text-center">{{ $student->rank }}</div>
                                                 </div>
                                                 <div class="modal-detail m-2 d-flex flex-column px-4">
                                                     <p class="text-justify">
@@ -124,5 +124,26 @@
     </div>
 
 @include('sections.scripts')
+@section('scripts')
+<script>
+    const lazyCards = document.querySelectorAll('.lazyload');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const lazyCard = entry.target;
+      lazyCard.classList.remove('lazyload'); // کلاس lazyload را حذف می کنیم تا مجددا بررسی نشود
+      // در اینجا هر کاری که برای بارگذاری محتوای داخل کارت نیاز دارید انجام دهید
+      // مثلا می توانید کلاس های خاصی را به عناصر داخل کارت اضافه کنید تا استایل آنها تغییر کند
+      // یا محتوای پنهان را نمایش دهید
+    }
+  });
+});
+
+lazyCards.forEach(lazyCard => {
+  observer.observe(lazyCard);
+});
+</script>
+@endsection
 </body>
 </html>
