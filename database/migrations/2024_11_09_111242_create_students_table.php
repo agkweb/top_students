@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('fullname');
-            $table->string('major');
+            $table->foreignId('major_id');
+            $table->foreign('major_id')->references('id')->on('student_majors')->onDelete('cascade');
             $table->integer('rank');
             $table->string('university');
             $table->string('behalf');

@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    @include('home.top_students.sections.styles')
+    <link rel="stylesheet" href="/assets/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <script src="/assets/index.js"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/index.css" rel="stylesheet">
     <title>کارنامه های برتر</title>
 </head>
 
 <body style="direction: rtl">
 <div class="row my-4 mx-0">
     <div class="container-fluid">
+        <form class="ml-0 col-12 d-flex row justify-content-around" action="{{ route('filter') }}" method="GET" id="filter">
+            <div class="form-group col-12 col-md-6 pr-0 d-flex row" style="text-align-last: start;">
+                <label for="filter" class="col-6 p-0" style="
+    align-self: end;text-align-last: left; ">نمایش بر اساس: </label>
+                <select class="form-control col-5 mr-1" id="filter" name="major" onchange="filterMajor()">
+                    @foreach($majors as $major)
+                        <option {{ request()->major == $major->id ? 'selected' : '' }} value="{{ $major->id }}">{{ $major->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </form>
         <div class="row main-content d-flex justify-content-center justify-content-md-between justify-content-md-around p-4">
             @foreach($students as $year => $yearStudent)
                 <div class="alert alert-info w-100 text-center">رتبه های برتر سال: {{ $year }}</div>
@@ -27,7 +41,7 @@
                             <div class="col-7 p-0 d-flex flex-column">
                                 <p class="person-name detail-source-p font-weight-bolder p-0 m-0 full-display-title"><small>{{ $student->gender }}</small> {{ $student->fullname }} </p>
                                 <p class="detail-source-p font-weight-bolder p-0 m-0 full-display-title" style="font-size: 20 !important;">
-                                    {{ $student->major }}
+                                    {{ $student->major->title }}
                                 </p>
                             </div>
                             <div class="col-5 p-0 row d-flex justify-content-between">
@@ -122,10 +136,16 @@
         </div>
     </div>
 </div>
-
-@include('home.top_students.sections.scripts')
-@section('scripts')
-    <script>
+<script>
+    function filterMajor() {
+        $('#filter').submit();
+    }
+</script>
+<script src="/assets/jquery-3.6.4.min.js"></script>
+<script src="/assets/popper.js"></script>
+<script src="/assets/bootstrap-4.6.2-dist/js/bootstrap.min.js"></script>
+<script src="/assets/karnameh.js"></script>
+<script>
         const lazyCards = document.querySelectorAll('.lazyload');
 
         const observer = new IntersectionObserver((entries) => {
@@ -144,6 +164,5 @@
             observer.observe(lazyCard);
         });
     </script>
-@endsection
 </body>
 </html>
